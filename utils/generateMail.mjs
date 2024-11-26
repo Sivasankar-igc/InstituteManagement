@@ -394,8 +394,8 @@ export const sendUserMsg_contactUs = (mailId, username, message) => {
             name: username,
             address: mailId
         },
-        to: "sahoosivasankar33@gmail.com",
-        subject: "Message From insti360 User",
+        to: process.env.SENDER_EMAIL_ACCOUNT,
+        subject: "Message From Insti360 User",
         html: `
         <h1>EmailId : ${mailId}</h1>
         <h1>Name : ${username}</h1>
@@ -416,8 +416,8 @@ export const sendUserMsg_contactUs = (mailId, username, message) => {
 const sendReply_contactUs = (mailId, username, message) => {
     const mailOptions = {
         from: {
-            name: "insti360",
-            address: "sahoosivasankar33@gmail.com"
+            name: "Insti360",
+            address: process.env.SENDER_EMAIL_ACCOUNT
         },
         to: mailId,
         subject: "Thank You for Contacting Us!",
@@ -438,15 +438,15 @@ const sendReply_contactUs = (mailId, username, message) => {
                             ${message}
                         </blockquote>
                         <p>We value every piece of feedback we receive. One of our team members will review your message and get back to you as soon as possible, typically within 48 hours.</p>
-                        <p>In the meantime, if you have any additional questions or need immediate assistance, please feel free to reply to this email or contact us directly at <a href="mailto:sahoosivasankar33@gmail.com">sahoosivasankar33@gmail.com</a>.</p>
+                        <p>In the meantime, if you have any additional questions or need immediate assistance, please feel free to reply to this email or contact us directly at <a href="mailto:contact.insti360@gmail.com">contact@insti360.com</a>.</p>
                         <p>Thank you again for contacting us. We look forward to assisting you!</p>
                         <p>Best regards,</p>
                         <p>
                             Siva Sankar Sahoo<br>
                             Founder and CEO<br>
                             insti360<br>
-                            <a href="mailto:sahoosivasankar33@gmail.com">sahoosivasankar33@gmail.com</a><br>
-                            <a href="https://insti360.com/">insti360</a>
+                            <a href="mailto:contact.insti360@gmail.com">contact@insti360.com</a><br>
+                            <a href="https://insti360.up.railway.app/">Insti360</a>
                         </p>
                     </td>
                 </tr>
