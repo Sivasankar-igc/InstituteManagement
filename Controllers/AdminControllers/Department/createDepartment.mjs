@@ -13,7 +13,7 @@ export default async (req, res) => {
 
         // CHECK WHETHER THERE IS ANY DEPARTMENT EXISTS WITH THE SAME NAME
         const departmentExists = instituteInfo.departments.find(department => department.departmentName === departmentName.trim().toUpperCase())
-console.log(departmentExists)
+
         if (departmentExists) {
             return res.status(200).json({ status: false, message: "Department Exists" })
         } else {

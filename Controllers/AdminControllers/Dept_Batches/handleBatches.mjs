@@ -10,16 +10,22 @@ export const createBatch = async (req, res) => {
         const { departmentId } = req.params;
         const { batchName, semester } = req.body;
 
-        if (!batchName || !semester)
+        if (!batchName.trim() || !semester)
             return res.status(200).json({ status: false, message: "All required fields must be filled" })
 
         if (isNaN(semester))
             return res.status(200).json({ status: false, message: "Semester must be a numeric value" })
 
+        const batchExists = await departmentCol.findOne({ _id: departmentId, "batches.batchName": batchName.trim() }, { "batches.$": 1 })
+
+        if (batchExists)
+            return res.status(200).json({ status: false, message: "Batch already exists. Try another name" })
+
+
         const response = await departmentCol.findByIdAndUpdate(departmentId, {
             $push: {
                 batches: {
-                    batchName: batchName,
+                    batchName: batchName.trim(),
                     semester: semester,
                     creationDate: {
                         time: generateTime(),

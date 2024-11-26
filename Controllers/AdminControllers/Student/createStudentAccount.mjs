@@ -37,7 +37,6 @@ export const createStudentAccount = async (req, res) => {
 
         // Generate a 6-digits password for student login credential
         const password = generatePassword();
-console.log(password);
 
         // Create the student instance
         const studentInfo = new studentCol({
