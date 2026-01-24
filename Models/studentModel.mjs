@@ -13,7 +13,15 @@ const studentSchema = new mongoose.Schema({
         instituteId: String,
         departmentId: mongoose.Schema.Types.ObjectId,
         batchName: String
-    }
+    },
+    studentRFIDUniqueId: { type: String, required: true },
+    studentActivity: [{
+        currentDate: String,
+        entryTime: String,
+        exitTime: { type: String, default: "NA" }
+        // status: String
+    }],
+    punchStatus: { type: String, default: "" }
 })
 
 const studentCol = new mongoose.model("studentCollection", studentSchema)

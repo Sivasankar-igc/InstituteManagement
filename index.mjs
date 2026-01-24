@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import { router as adminRouter } from "./Routes/AdminRoutes/adminRoute.mjs"
 import { router as studentRouter } from "./Routes/StudentRoutes/studentRoute.mjs"
 import { router as teacherRouter } from "./Routes/TeacherRoutes/teacherRoutes.mjs"
+import { router as punchIdRouter } from "./Routes/PunchIdRoutes/punchID.mjs"
 import instituteLogin from "./Controllers/instituteLogin.mjs"
 import cors from "cors"
 import { cloudinary_upload } from "./cloudinaryConfig/storage.mjs"
@@ -36,28 +37,31 @@ const __dirname = dirname(__filename)
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
+const DEFAULT_ROUTE = "/api/v1/";
+
 mongoose.connect(MONGODB_URI)
     .then(() => console.log("Database connected successfully"))
-    .catch(err => console.error(`Database connection error --> ${err}`))
+    .catch(err => console.error(`${MONGODB_URI}Database connection error --> ${err}`))
 
 checkExamTimeOver()
 
-web.use("/api/v1/admin", adminRouter)
-web.use("/api/v1/student", studentRouter)
-web.use("/api/v1/faculty", teacherRouter)
-web.post("/api/v1/institute/login", instituteLogin)
+web.use(`${DEFAULT_ROUTE}admin`, adminRouter)
+web.use(`${DEFAULT_ROUTE}student`, studentRouter)
+web.use(`${DEFAULT_ROUTE}faculty`, teacherRouter)
+web.use(`${DEFAULT_ROUTE}punchId`, punchIdRouter)
+web.post(`${DEFAULT_ROUTE}institute/login`, instituteLogin)
 
-web.post("/api/v1/uploadPDF", cloudinary_upload.single("pdf"), handleUpload)
-web.post("/api/v1/downloadPDF", handleDownload)
+web.post(`${DEFAULT_ROUTE}uploadPDF`, cloudinary_upload.single("pdf"), handleUpload)
+web.post(`${DEFAULT_ROUTE}downloadPDF`, handleDownload)
 
-web.patch("/api/v1/changePassword", changePassword)
-web.post("/api/v1/sendOtp", sendOtp)
+web.patch(`${DEFAULT_ROUTE}changePassword`, changePassword)
+web.post(`${DEFAULT_ROUTE}sendOtp`, sendOtp)
 
-web.get("/api/v1/authenticate", checkUserAuthentication);
+web.get(`${DEFAULT_ROUTE}authenticate`, checkUserAuthentication);
 
-web.get("/api/v1/logout", logout)
+web.get(`${DEFAULT_ROUTE}logout`, logout)
 
-web.post("/api/v1/contactUs", handleContactus)
+web.post(`${DEFAULT_ROUTE}contactUs`, handleContactus)
 
 web.use(express.static(path.join(__dirname, "./dist")))
 web.get("*", (req, res) => {

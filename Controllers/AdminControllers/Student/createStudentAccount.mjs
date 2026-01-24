@@ -8,8 +8,8 @@ export const createStudentAccount = async (req, res) => {
     try {
         const { instituteId, departmentId, batchName } = req.query;
 
-        const { firstName, lastName, studentEmail, studentId, studentDOB } = req.body;
-        if (!firstName || !lastName || !studentEmail || !studentId || !studentDOB)
+        const { firstName, lastName, studentEmail, studentId, studentDOB, studentRFIDUniqueId } = req.body;
+        if (!firstName || !lastName || !studentEmail || !studentId || !studentDOB || !studentRFIDUniqueId)
             return res.status(200).json({ status: false, message: "All required fields must be filled" })
 
         if (!new RegExp("^[a-zA-Z][a-zA-Z.\\s]+[a-zA-Z]+$").test(firstName.trim()))
@@ -28,7 +28,8 @@ export const createStudentAccount = async (req, res) => {
             "studentDeptInfo.batchName": batchName,
             $or: [
                 { studentEmail: studentEmail },
-                { studentId: studentId }
+                { studentId: studentId },
+                { studentRFIDUniqueId: studentRFIDUniqueId}
             ]
         })
 
@@ -52,7 +53,8 @@ export const createStudentAccount = async (req, res) => {
                 instituteId,
                 departmentId,
                 batchName
-            }
+            },
+            studentRFIDUniqueId // holds the RFID Id
         })
 
         // Save the data in the student collections
