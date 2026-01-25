@@ -64,7 +64,6 @@ export const createStudentAccount = async (req, res) => {
         if (!studentRes)
             return res.status(200).json({ status: false, message: "Student Document couldn't be created" })
 
-
         const response = await departmentCol.findOneAndUpdate({ _id: departmentId, "batches.batchName": batchName }, { $push: { "batches.$.studentList": { studentId: studentRes._id } } })
 
         if (response) {

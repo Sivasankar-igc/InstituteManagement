@@ -5,6 +5,7 @@ import { router as adminRouter } from "./Routes/AdminRoutes/adminRoute.mjs"
 import { router as studentRouter } from "./Routes/StudentRoutes/studentRoute.mjs"
 import { router as teacherRouter } from "./Routes/TeacherRoutes/teacherRoutes.mjs"
 import { router as punchIdRouter } from "./Routes/PunchIdRoutes/punchID.mjs"
+import { router as attendanceRouter } from "./Routes/Attendance/attendanceRoute.mjs"
 import instituteLogin from "./Controllers/instituteLogin.mjs"
 import cors from "cors"
 import { cloudinary_upload } from "./cloudinaryConfig/storage.mjs"
@@ -49,6 +50,7 @@ web.use(`${DEFAULT_ROUTE}admin`, adminRouter)
 web.use(`${DEFAULT_ROUTE}student`, studentRouter)
 web.use(`${DEFAULT_ROUTE}faculty`, teacherRouter)
 web.use(`${DEFAULT_ROUTE}punchId`, punchIdRouter)
+web.use(`${DEFAULT_ROUTE}attendance`, attendanceRouter)
 web.post(`${DEFAULT_ROUTE}institute/login`, instituteLogin)
 
 web.post(`${DEFAULT_ROUTE}uploadPDF`, cloudinary_upload.single("pdf"), handleUpload)

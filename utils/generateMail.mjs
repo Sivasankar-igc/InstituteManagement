@@ -5,14 +5,24 @@ dotenv.config()
 const SENDER_MAIL = process.env.SENDER_EMAIL_ACCOUNT;
 
 const transporter = Nodemailer.createTransport({
-    service: "gmail",
+    // service: "gmail",
+    // host: "smtp.gmail.com",
+    // port: 465,
+    // secure: true,
+    // auth: {
+    //     user: SENDER_MAIL,
+    //     pass: process.env.APP_PASSWORD
+    // }
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
     auth: {
-        user: SENDER_MAIL,
-        pass: process.env.APP_PASSWORD
-    }
+        user: process.env.SENDER_EMAIL_ACCOUNT,
+        pass: process.env.APP_PASSWORD, // ✅ Gmail App Password (16 chars)
+    },
+    connectionTimeout: 20000,
+    greetingTimeout: 20000,
+    socketTimeout: 20000,
 })
 
 // ADMIN CREATION MAIL
@@ -339,21 +349,21 @@ export const removeStudentMail = (deptInfo, studentInfo) => {
 
 
 // Send Password changing request otp to mail
-export const sendOTP = (otp, type, instituteName, mail) => {
+export const sendOTP = (otp, instituteName, mail) => {
     const mailOptions = {
         from: {
             name: instituteName,
             address: SENDER_MAIL
         },
         to: mail,
-        subject: `$6-digit OTP`,
-        html: `
-        <h4>Your 6-character OTP is : ${otp}</h4>`,
+        subject: "6-digit OTP",
+        html: ` <h4>Your 6-character OTP is : ${otp}</h4>`
     }
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.error(`Server Error : otp couldn't be sent --> ${error}`);
-        } else {
+        }
+        else {
             return true
         }
     });

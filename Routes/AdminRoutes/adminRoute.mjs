@@ -25,6 +25,7 @@ import getBatchByName from "../../Controllers/AdminControllers/Dept_Batches/getB
 import getStudentInfos from "../../Controllers/AdminControllers/Student/getStudentInfos.mjs"
 import getAssignments from "../../Controllers/getAssignments.mjs"
 import checkPassword from "../../Controllers/AdminControllers/Admin/checkPassword.mjs"
+import createAttendance from "../../Controllers/AdminControllers/Dept_Batches/createAttendance.mjs"
 
 const router = express.Router()
 
@@ -115,6 +116,8 @@ router.route("/handleBatchExam")
     .delete(removeExam) // done
     .post(getExam) //done
     .get(resetExam)
+
+router.post("/createAttendance", createAttendance); // done
 
 
 router.get("/getBatchInfo", getBatchByName) // done
