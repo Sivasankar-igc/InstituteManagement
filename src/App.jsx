@@ -54,6 +54,7 @@ import "./CSS/punchIn.css"
 import "./CSS/attendance.css"
 import "./CSS/resumeScanner.css"
 import "./CSS/careerBot.css"
+import "./CSS/mockExamBot.css"
 import TermsAndConditions from "./Pages/TermsAndCondition";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import CancellationRefundPolicy from "./Pages/CancellationRefundingPolicy";

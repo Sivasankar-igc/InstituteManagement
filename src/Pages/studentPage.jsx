@@ -8,6 +8,7 @@ import ShowAssignments from "../Components/ShowAssignments";
 import ShowStudentExams from "../Components/Student/ShowStudentExams";
 import ResumeScanner from "../Components/Student/ResumeScanner";
 import CareerBot from "../Components/Student/careerBot";
+import MockExamBot from "../Components/Student/MockExamBot";
 import { useAuthenticateContext } from "../Context_API/Authentication";
 import { useSideBarActiveContext } from "../Context_API/SideBarActivation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -64,6 +65,7 @@ const StudentPage = () => {
                 <button onClick={() => navigate(`/institute/${instituteData.instituteId}/department/${departmentData.departmentName}`)} >Department</button>
                 <button onClick={() => showPanelContent("chatbot")} className={`panel-buttton ${showField === "chatbot" && "active"}`}>AI Career Bot</button>
                 <button onClick={() => showPanelContent("resumeScanner")} className={`panel-buttton ${showField === "resumeScanner" && "active"}`}>Resume Scanner</button>
+                <button onClick={() => showPanelContent("mockExam")} className={`panel-buttton ${showField === "mockExam" && "active"}`}>Mock Exam</button>
                 <button onClick={logout} >Logout</button>
             </div>
             <div className="main-content">
@@ -74,6 +76,7 @@ const StudentPage = () => {
                 {showField === "institute" && <ShowInstitute />}
                 {showField === "resumeScanner" && <ResumeScanner />}
                 {showField === "chatbot" && <CareerBot />}
+                {showField === "mockExam" && <MockExamBot subjects={subjects} />}
                 {showField === "exams" && <ShowStudentExams batchName={batchData.batchName} deptName={departmentData.departmentName} deptId={departmentData._id} subjects={subjects} />}
             </div>
         </section>
