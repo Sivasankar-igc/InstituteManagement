@@ -52,6 +52,8 @@ import "./CSS/cancellationRefunding.css"
 import "./CSS/batchAttendance.css"
 import "./CSS/punchIn.css"
 import "./CSS/attendance.css"
+import "./CSS/resumeScanner.css"
+import "./CSS/careerBot.css"
 import TermsAndConditions from "./Pages/TermsAndCondition";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import CancellationRefundPolicy from "./Pages/CancellationRefundingPolicy";
@@ -60,8 +62,8 @@ import PunchIn from "./Pages/punchIn";
 import PunchOut from "./Pages/punchOut";
 
 
-// axios.defaults.baseURL = "http://localhost:8000/api/v1/"
-axios.defaults.baseURL = "/api/v1/"
+axios.defaults.baseURL = "http://localhost:8000/api/v1/"
+// axios.defaults.baseURL = "/api/v1/"
 
 const App = () => {
 

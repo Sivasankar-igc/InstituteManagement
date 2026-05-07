@@ -6,10 +6,12 @@ import ShowInstitute from "../Components/ShowInstitute";
 import Announcement from "../Components/Announcement";
 import ShowAssignments from "../Components/ShowAssignments";
 import ShowStudentExams from "../Components/Student/ShowStudentExams";
+import ResumeScanner from "../Components/Student/ResumeScanner";
+import CareerBot from "../Components/Student/careerBot";
 import { useAuthenticateContext } from "../Context_API/Authentication";
 import { useSideBarActiveContext } from "../Context_API/SideBarActivation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCompass } from "@fortawesome/free-solid-svg-icons";
+import { faCompass, faRobot } from "@fortawesome/free-solid-svg-icons";
 
 const StudentPage = () => {
 
@@ -60,6 +62,8 @@ const StudentPage = () => {
                 <button onClick={() => showPanelContent("exams")} className={`panel-buttton ${showField === "exams" && "active"}`}>Exams</button>
                 <button onClick={() => showPanelContent("assignments")} className={`panel-buttton ${showField === "assignments" && "active"}`}>Assignments</button>
                 <button onClick={() => navigate(`/institute/${instituteData.instituteId}/department/${departmentData.departmentName}`)} >Department</button>
+                <button onClick={() => showPanelContent("chatbot")} className={`panel-buttton ${showField === "chatbot" && "active"}`}>AI Career Bot</button>
+                <button onClick={() => showPanelContent("resumeScanner")} className={`panel-buttton ${showField === "resumeScanner" && "active"}`}>Resume Scanner</button>
                 <button onClick={logout} >Logout</button>
             </div>
             <div className="main-content">
@@ -68,6 +72,8 @@ const StudentPage = () => {
                 {showField === "batchAnn" && <Announcement deptId={departmentData._id} announcements={batchData?.batchAnnouncements} batchName={batchData?.batchName} type={"Batch"} />}
                 {showField === "assignments" && <ShowAssignments deptId={departmentData._id} subjects={subjects} teacherName={null} type={"student"} isVisiting={true} />}
                 {showField === "institute" && <ShowInstitute />}
+                {showField === "resumeScanner" && <ResumeScanner />}
+                {showField === "chatbot" && <CareerBot />}
                 {showField === "exams" && <ShowStudentExams batchName={batchData.batchName} deptName={departmentData.departmentName} deptId={departmentData._id} subjects={subjects} />}
             </div>
         </section>
