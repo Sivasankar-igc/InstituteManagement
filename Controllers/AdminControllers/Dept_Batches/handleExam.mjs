@@ -1,5 +1,8 @@
 import departmentCol from "../../../Models/departmentModel.mjs";
-import examinationCol from "../../../Models/examinationModel.mjs"
+import examinationCol from "../../../Models/examinationModel.mjs";
+import { studentPushNotification_exam } from "../../../utils/generateMail.mjs";
+import studentCol from "../../../Models/studentModel.mjs";
+import mongoose from "mongoose";
 
 export const getExam = async (req, res) => {
     try {
@@ -17,7 +20,7 @@ export const getExam = async (req, res) => {
 
 export const setExam = async (req, res) => {
     try {
-        const { examId, date, time, duration, semester } = req.body;
+        const { deptId, instituteName, departmentName, headOfDepartment, examId, date, time, duration, semester, subject } = req.body;
 
         if (!examId || !date || !time || !duration)
             return res.status(200).json({ status: false, message: "All required fields must be filled" })
@@ -57,6 +60,73 @@ export const setExam = async (req, res) => {
             message: response ?? "Something went wrong"
         })
 
+
+        // Sending notification to students about the scheduled examination. 
+        // Important: This should be done after sending the response to the admin to avoid any delay in response due to mail sending process. Hence, not awaiting the mail sending process.
+
+        setTimeout(async () => {
+            try {
+                const department = await departmentCol.findOne(
+                    {
+                        _id: deptId,
+                        "batches.semester": semester
+                    },
+                    {
+                        "batches.$": 1
+                    }
+                );
+
+                const studentIds =
+                    department?.batches?.[0]?.studentList?.map(
+                        (student) => student.studentId
+                    ) || [];
+
+                const students = await studentCol.find(
+                    {
+                        _id: { $in: studentIds }
+                    },
+                    {
+                        studentEmail: 1,
+                        studentName: 1
+                    }
+                );
+
+                if (students.length > 0) {
+                    const deptInfo = {
+                        instituteName,
+                        departmentName,
+                        headOfDepartment
+                    };
+
+                    const examInfo = {
+                        paperName: subject,
+                        examDate: date,
+                        examTime: ampmTime,
+                        duration: duration,
+                        batchName: department.batches[0].batchName
+                    };
+
+                    await Promise.all(
+                        students.map((student) =>
+                            studentPushNotification_exam(
+                                deptInfo,
+                                examInfo,
+                                {
+                                    studentEmail: student.studentEmail,
+                                    studentName: student.studentName
+                                }
+                            )
+                        )
+                    );
+                }
+            } catch (error) {
+                console.error(
+                    `Server error : sending assignment notification --> ${error}`
+                );
+            }
+        }, 0);
+
+        return;
 
     } catch (error) {
         console.error(`Server error : setting exam --> ${error}`)

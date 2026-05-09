@@ -1,13 +1,16 @@
 import assignmentCol from "../../Models/assignmentModel.mjs";
 import departmentCol from "../../Models/departmentModel.mjs";
+import studentCol from "../../Models/studentModel.mjs";
 import { generateDate } from "../../utils/generateDate.mjs"
 import { generateTime } from "../../utils/generateTime.mjs"
+import { studentPushNotification_assignment } from "../../utils/generateMail.mjs";
+import mongoose from "mongoose";
 
 
 export const createAssignment = async (req, res) => {
     try {
         const { deptId } = req.query;
-        const { teacherName, subject, submissionDate, submissionTime, assignment } = req.body;
+        const { instituteName, departmentName, headOfDepartment, teacherName, subject, submissionDate, submissionTime, assignment } = req.body;
 
         if (!teacherName || !subject || !submissionDate || !submissionTime || !assignment)
             return res.status(200).json({ status: false, message: "All required fields must be filled" })
@@ -59,14 +62,75 @@ export const createAssignment = async (req, res) => {
             return res.status(200).json({ status: false, message: "Something went wrong!!!" })
         }
 
-        res.status(201).json({ status: true, message: assRes })
+        res.status(201).json({ status: true, message: assRes });
 
+        setTimeout(async () => {
+            try {
+                const department = await departmentCol.findOne(
+                    {
+                        _id: deptId,
+                        "batches.semester": findSemester.papers[0].semester
+                    },
+                    {
+                        "batches.$": 1
+                    }
+                );
+
+                const studentIds =
+                    department?.batches?.[0]?.studentList?.map(
+                        (student) => student.studentId
+                    ) || [];
+
+                const students = await studentCol.find(
+                    {
+                        _id: { $in: studentIds }
+                    },
+                    {
+                        studentEmail: 1,
+                        studentName: 1
+                    }
+                );
+
+                if (students.length > 0) {
+                    const deptInfo = {
+                        instituteName,
+                        departmentName,
+                        headOfDepartment
+                    };
+
+                    const assignmentInfo = {
+                        paperName: subject,
+                        submissionDate,
+                        submissionTime,
+                        batchName: department.batches[0].batchName
+                    };
+
+                    await Promise.all(
+                        students.map((student) =>
+                            studentPushNotification_assignment(
+                                deptInfo,
+                                assignmentInfo,
+                                {
+                                    studentEmail: student.studentEmail,
+                                    studentName: student.studentName
+                                }
+                            )
+                        )
+                    );
+                }
+            } catch (error) {
+                console.error(
+                    `Server error : sending assignment notification --> ${error}`
+                );
+            }
+        }, 0);
+
+        return;
     } catch (error) {
         console.error(`Server error : assignment creation --> ${error}`)
         res.status(500).send()
     }
 }
-
 
 export const modifyAssignment = async (req, res) => {
     try {

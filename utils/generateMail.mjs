@@ -422,6 +422,141 @@ export const sendUserMsg_contactUs = (mailId, username, message) => {
     });
 }
 
+export const studentPushNotification_assignment = async (deptInfo, assignmentInfo, studentInfo) => {
+    const mailOptions = {
+        from: {
+            name: deptInfo.instituteName,
+            address: SENDER_MAIL
+        },
+        to: studentInfo.studentEmail,
+        subject: `New Assignment Created - ${assignmentInfo.paperName}`,
+        html: `
+                <body style="font-family: Arial, sans-serif; line-height: 1.6;">
+                    <table width="100%" cellpadding="0" cellspacing="0"
+                        style="max-width: 600px; margin: 0 auto; border: 1px solid #ddd; padding: 20px;">
+                        
+                        <tr>
+                            <td style="padding: 10px 0; text-align: center;">
+                                <h2>New Assignment Notification</h2>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 0;">
+                                <p>Dear <strong>${studentInfo.studentName.firstName} ${studentInfo.studentName.lastName}</strong>,</p>
+
+                                <p>
+                                    A new assignment has been created for your batch at
+                                    <strong>${deptInfo.instituteName}</strong>.
+                                </p>
+
+                                <p><strong>Institute Name:</strong> ${deptInfo.instituteName}</p>
+                                <p><strong>Department Name:</strong> ${deptInfo.departmentName}</p>
+                                <p><strong>Batch Name:</strong> ${assignmentInfo.batchName}</p>
+                                <p><strong>Paper Name:</strong> ${assignmentInfo.paperName}</p>
+                                <p><strong>Submission Date:</strong> ${assignmentInfo.submissionDate}</p>
+                                <p><strong>Submission Time:</strong> ${assignmentInfo.submissionTime}</p>
+
+                                <p>
+                                    Please complete and submit your assignment before the deadline.
+                                </p>
+
+                                <p>Best regards,</p>
+                                <p>
+                                    ${deptInfo.headOfDepartment}<br>
+                                    Head Of Department<br>
+                                    ${deptInfo.departmentName}, ${deptInfo.instituteName}<br>
+                                    <a href="mailto:${SENDER_MAIL}">${SENDER_MAIL}</a>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </body>
+            `
+    }
+
+    try {
+        // IMPORTANT: No callback here
+        const info = await transporter.sendMail(mailOptions);
+        return info;
+    } catch (error) {
+        console.error(
+            `Server Error: assignment notification mail couldn't be sent --> ${error}`
+        );
+        throw error;
+    }
+
+}
+
+export const studentPushNotification_exam = async (
+    deptInfo,
+    examInfo,
+    studentInfo
+) => {
+    const mailOptions = {
+        from: {
+            name: deptInfo.instituteName,
+            address: SENDER_MAIL
+        },
+        to: studentInfo.studentEmail,
+        subject: `New Examination Scheduled - ${examInfo.paperName}`,
+        html: `
+            <body style="font-family: Arial, sans-serif; line-height: 1.6;">
+                <table width="100%" cellpadding="0" cellspacing="0"
+                    style="max-width: 600px; margin: 0 auto; border: 1px solid #ddd; padding: 20px;">
+                    
+                    <tr>
+                        <td style="padding: 10px 0; text-align: center;">
+                            <h2>New Examination Notification</h2>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 10px 0;">
+                            <p>Dear <strong>${studentInfo.studentName.firstName} ${studentInfo.studentName.lastName}</strong>,</p>
+
+                            <p>
+                                A new examination has been scheduled for your batch at
+                                <strong>${deptInfo.instituteName}</strong>.
+                            </p>
+
+                            <p><strong>Institute Name:</strong> ${deptInfo.instituteName}</p>
+                            <p><strong>Department Name:</strong> ${deptInfo.departmentName}</p>
+                            <p><strong>Batch Name:</strong> ${examInfo.batchName}</p>
+                            <p><strong>Paper Name:</strong> ${examInfo.paperName}</p>
+                            <p><strong>Exam Date:</strong> ${examInfo.examDate}</p>
+                            <p><strong>Exam Time:</strong> ${examInfo.examTime}</p>
+                            <p><strong>Duration:</strong> ${Math.floor(examInfo.duration / 60)} hour ${examInfo.duration % 60} minutes</p>
+
+                            <p>
+                                Please be prepared and attend the examination on time.
+                            </p>
+
+                            <p>Best regards,</p>
+                            <p>
+                                ${deptInfo.headOfDepartment}<br>
+                                Head Of Department<br>
+                                ${deptInfo.departmentName}, ${deptInfo.instituteName}<br>
+                                <a href="mailto:${SENDER_MAIL}">${SENDER_MAIL}</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+        `
+    };
+
+    try {
+        // IMPORTANT: No callback here
+        const info = await transporter.sendMail(mailOptions);
+        return info;
+    } catch (error) {
+        console.error(
+            `Server Error: examination notification mail couldn't be sent --> ${error}`
+        );
+        throw error;
+    }
+};
 
 const sendReply_contactUs = (mailId, username, message) => {
     const mailOptions = {
