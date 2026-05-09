@@ -64,7 +64,7 @@ export default ({ deptId, subjects, teacherName, type, isVisiting }) => { // typ
                     </>
                 }
                 {
-                    canShowAssignment && canAddAssignment && <CreateAssignment onClose={() => setCanAddAssignment(false)} deptId={deptId} subject={currentSubject} teacherName={teacherName} addAssignment={addAssignment} />
+                    canShowAssignment && canAddAssignment && <CreateAssignment onClose={() => setCanAddAssignment(false)} subject={currentSubject} teacherName={teacherName} addAssignment={addAssignment} />
                 }
             </div>
         </section>

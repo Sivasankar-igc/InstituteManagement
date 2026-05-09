@@ -58,7 +58,7 @@ export default ({ exams, deptId, setExams, getExams }) => {
             let duration = (parseInt(updatingExam.hour) * 60) + parseInt(updatingExam.minute)
             setIsloading(true)
 
-            axios.patch(`admin/handleBatchExam`, { examId: updatingExam._id, date: updatingExam.date, time: updatingExam.time, duration: duration, semester:batchData.semester })
+            axios.patch(`admin/handleBatchExam`, { deptId, instituteName: instidata.instituteName, departmentName: deptData.departmentName, headOfDepartment: deptData.headOfDepartment, examId: updatingExam._id, date: updatingExam.date, time: updatingExam.time, duration: duration, semester:batchData.semester, subject: updatingExam.subject })
                 .then(res => {
                     const { status, message } = res.data;
                     if (!status) return toast(message``)
@@ -185,7 +185,7 @@ export default ({ exams, deptId, setExams, getExams }) => {
                                                 <FontAwesomeIcon icon={isloading ? faSpinner : faRotate} spin={isloading} />
                                             </button>
                                             : <button
-                                                onClick={() => setUpdatingExam({ ...exam, date: "", time: "", hour: 0, minute: 0 })}
+                                                onClick={() => setUpdatingExam({ ...exam, date: "", time: "", hour: 0, minute: 0, subject: exam.paperName })}
                                                 className="violet-btn table-btn tiny-btn"
                                                 disabled={isloading || isRemoving}
                                             >

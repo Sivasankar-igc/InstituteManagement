@@ -5,9 +5,11 @@ import { toast } from "react-toastify";
 import { useLoadingContext } from "../Context_API/LoadingContext";
 import FormPopUp from "./Others/FormPopUp";
 
-export default ({ deptId, subject, teacherName, onClose, addAssignment }) => {
+export default ({ subject, teacherName, onClose, addAssignment }) => {
 
     const { setIsloading } = useLoadingContext()
+    const { data: departmentData } = useSelector(state => state.department)
+    const { data: instituteData } = useSelector(state => state.institute)
 
     const [assignmentInfo, setAssignmentInfo] = useState({
         teacherName: teacherName,
@@ -39,8 +41,15 @@ export default ({ deptId, subject, teacherName, onClose, addAssignment }) => {
         e.preventDefault()
         setIsloading(true)
 
-        axios.post(`faculty/createAssignment/?deptId=${deptId}`, {
-            teacherName, subject, assignment: assignmentInfo.assignment, submissionDate: assignmentInfo.submissionDate, submissionTime: assignmentInfo.submissionTime
+        axios.post(`faculty/createAssignment/?deptId=${departmentData._id}`, {
+            instituteName: instituteData.instituteName,
+            departmentName: departmentData.departmentName,
+            headOfDepartment: departmentData.headOfDepartment,
+            teacherName,
+            subject,
+            assignment: assignmentInfo.assignment,
+            submissionDate: assignmentInfo.submissionDate,
+            submissionTime: assignmentInfo.submissionTime
         })
             .then(res => {
                 const { status, message } = res.data;
