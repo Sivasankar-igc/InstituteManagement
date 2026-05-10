@@ -6,72 +6,73 @@ import ShowInstitute from "../Components/ShowInstitute";
 import Announcement from "../Components/Announcement";
 import ShowAssignments from "../Components/ShowAssignments";
 import ShowStudentExams from "../Components/Student/ShowStudentExams";
+import MockExamBot from "../Components/Student/MockExamBot";
+import CareerBot from "../Components/Student/careerBot";
+import ResumeScanner from "../Components/Student/ResumeScanner";
 import { useAuthenticateContext } from "../Context_API/Authentication";
-import { useSideBarActiveContext } from "../Context_API/SideBarActivation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCompass } from "@fortawesome/free-solid-svg-icons";
+import {
+    faUser, faBuilding, faBullhorn, faClipboardList, faFileAlt,
+    faLayerGroup, faRightFromBracket, faRobot, faMagnifyingGlass, faBrain
+} from "@fortawesome/free-solid-svg-icons";
+import DashboardLayout from "../Components/Others/DashboardLayout";
 
 const StudentPage = () => {
+    const { data: studentData } = useSelector(state => state.student);
+    const { data: departmentData } = useSelector(state => state.department);
+    const { data: instituteData } = useSelector(state => state.institute);
+    const { data: batchData } = useSelector(state => state.batch);
+    const { logout } = useAuthenticateContext();
+    const navigate = useNavigate();
 
-    const { data: studentData } = useSelector(state => state.student)
-    const { data: departmentData } = useSelector(state => state.department)
-    const { data: instituteData } = useSelector(state => state.institute)
-    const { data: batchData } = useSelector(state => state.batch)
-
-    const { logout } = useAuthenticateContext()
-
-    const navigate = useNavigate()
-
-    const [showField, setShowField] = useState("account")
-    const [subjects, setSubjects] = useState([])
-
-    const { activeSideBar, setActiveSideBar } = useSideBarActiveContext()
+    const [showField, setShowField] = useState("account");
+    const [subjects, setSubjects] = useState([]);
 
     useEffect(() => {
-        let temp = []
-        departmentData.papers.map(({ name, semester }) => {
-            if (semester === batchData.semester) temp.push(name)
-        })
-        setSubjects(temp)
-    }, [departmentData])
+        const temp = [];
+        departmentData?.papers?.forEach(({ name, semester }) => {
+            if (semester === batchData?.semester) temp.push(name);
+        });
+        setSubjects(temp);
+    }, [departmentData]);
 
-    const toggleSidebar = () => {
-        setActiveSideBar(!activeSideBar)
-    };
+    const navItems = [
+        { key: "account",      label: "My Account",             icon: faUser,          onClick: () => setShowField("account") },
+        { key: "institute",    label: "Institute",               icon: faBuilding,      onClick: () => setShowField("institute") },
+        { key: "instituteAnn", label: "Institute Announcements", icon: faBullhorn,      onClick: () => setShowField("instituteAnn") },
+        { key: "batchAnn",     label: "Batch Announcements",     icon: faBullhorn,      onClick: () => setShowField("batchAnn") },
+        { key: "exams",        label: "Exams",                   icon: faFileAlt,       onClick: () => setShowField("exams") },
+        { key: "assignments",  label: "Assignments",             icon: faClipboardList, onClick: () => setShowField("assignments") },
+        { key: "dept",         label: "Department",              icon: faLayerGroup,    onClick: () => navigate(`/institute/${instituteData.instituteId}/department/${departmentData.departmentName}`) },
+        { key: "mockExam",     label: "Mock Exam AI",            icon: faBrain,         onClick: () => setShowField("mockExam") },
+        { key: "chatbot",      label: "Career Guidance AI",      icon: faRobot,         onClick: () => setShowField("chatbot") },
+        { key: "resumeScanner",label: "Resume Scanner AI",       icon: faMagnifyingGlass,    onClick: () => setShowField("resumeScanner") },
+    ];
 
-    const showPanelContent = (content) => {
-        setShowField(content)
-        toggleSidebar()
-    }
+    const bottomItems = [
+        { key: "logout", label: "Log Out", icon: faRightFromBracket, onClick: logout, danger: true },
+    ];
 
     return (
-        <section className="user-panel">
-            <div className="hamburger-menu">
-                <button className="hamburger-button" onClick={toggleSidebar}>
-                    <FontAwesomeIcon icon={faCompass} spin />
-                </button>
-            </div>
-            <div className={`sidebar ${activeSideBar ? "active" : ""}`}>
-                <h2>Student DashBoard</h2>
-                <button onClick={() => showPanelContent("account")} className={`panel-buttton ${showField === "account" && "active"}`} >My Account</button>
-                <button onClick={() => showPanelContent("institute")} className={`panel-buttton ${showField === "institute" && "active"}`}>Institute</button>
-                <button onClick={() => showPanelContent("instituteAnn")} className={`panel-buttton ${showField === "instituteAnn" && "active"}`}>Institute Announcement</button>
-                <button onClick={() => showPanelContent("batchAnn")} className={`panel-buttton ${showField === "batchAnn" && "active"}`}>Batch Announcement</button>
-                <button onClick={() => showPanelContent("exams")} className={`panel-buttton ${showField === "exams" && "active"}`}>Exams</button>
-                <button onClick={() => showPanelContent("assignments")} className={`panel-buttton ${showField === "assignments" && "active"}`}>Assignments</button>
-                <button onClick={() => navigate(`/institute/${instituteData.instituteId}/department/${departmentData.departmentName}`)} >Department</button>
-                <button onClick={logout} >Logout</button>
-            </div>
-            <div className="main-content">
-                {showField === "account" && <ShowStudent student={studentData} />}
-                {showField === "instituteAnn" && <Announcement deptId={departmentData._id} announcements={instituteData.announcements} batchName={null} type={null} instituteId={instituteData.instituteId} />}
-                {showField === "batchAnn" && <Announcement deptId={departmentData._id} announcements={batchData?.batchAnnouncements} batchName={batchData?.batchName} type={"Batch"} />}
-                {showField === "assignments" && <ShowAssignments deptId={departmentData._id} subjects={subjects} teacherName={null} type={"student"} isVisiting={true} />}
-                {showField === "institute" && <ShowInstitute />}
-                {showField === "exams" && <ShowStudentExams batchName={batchData.batchName} deptName={departmentData.departmentName} deptId={departmentData._id} subjects={subjects} />}
-            </div>
-        </section>
-    )
-}
+        <DashboardLayout
+            title="Student Dashboard"
+            subtitle={`${studentData?.studentName?.firstName || ""} ${studentData?.studentName?.lastName || ""}`.trim()}
+            icon={faUser}
+            navItems={navItems}
+            bottomItems={bottomItems}
+            activeKey={showField}
+            pageTitle="Student Dashboard"
+        >
+            {showField === "account"       && <ShowStudent student={studentData} />}
+            {showField === "institute"     && <ShowInstitute />}
+            {showField === "instituteAnn"  && <Announcement deptId={departmentData._id} announcements={instituteData.announcements} batchName={null} type={null} instituteId={instituteData.instituteId} />}
+            {showField === "batchAnn"      && <Announcement deptId={departmentData._id} announcements={batchData?.batchAnnouncements} batchName={batchData?.batchName} type="Batch" />}
+            {showField === "assignments"   && <ShowAssignments deptId={departmentData._id} subjects={subjects} teacherName={null} type="student" isVisiting={true} />}
+            {showField === "exams"         && <ShowStudentExams batchName={batchData.batchName} deptName={departmentData.departmentName} deptId={departmentData._id} subjects={subjects} />}
+            {showField === "mockExam"      && <MockExamBot subjects={subjects} />}
+            {showField === "chatbot"       && <CareerBot />}
+            {showField === "resumeScanner" && <ResumeScanner />}
+        </DashboardLayout>
+    );
+};
 
-export default StudentPage
+export default StudentPage;

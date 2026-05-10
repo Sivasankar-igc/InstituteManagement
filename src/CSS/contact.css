@@ -1,88 +1,135 @@
-/* ContactForm.css */
+/* ── Luxury Contact Page ── */
 
 .contact-section {
-    padding: 60px 20px;
-    background-color: #f9f9f9;
+  padding: var(--space-20) var(--space-8);
+  background: linear-gradient(135deg, var(--peach-bg) 0%, var(--cream) 100%);
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
 }
 
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .contact-section h2 {
-    font-size: 2.5rem;
-    color: #333;
-    text-align: center;
-    margin-bottom: 30px;
+  font-family: var(--font-primary);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--gray-800);
+  text-align: center;
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.02em;
+}
+
+.contact-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--gray-500);
+  margin-bottom: var(--space-10);
 }
 
 .contact-section form {
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+  background: var(--white);
+  padding: var(--space-10);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-section form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blush), var(--rose-deep), var(--nude));
 }
 
 .contact-section .form-group {
-    margin-bottom: 20px;
+  margin-bottom: var(--space-5);
 }
 
 .contact-section label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 8px;
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+  margin-bottom: 8px;
 }
-
 
 .contact-section input[type="email"],
 .contact-section input[type="text"],
 .contact-section textarea {
-    width: 95%;
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  padding: 13px 18px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: var(--gray-50);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: all var(--transition-base);
+  box-sizing: border-box;
+}
+
+.contact-section input[type="email"]:focus,
+.contact-section input[type="text"]:focus,
+.contact-section textarea:focus {
+  background: var(--white);
+  border-color: var(--blush);
+  box-shadow: 0 0 0 4px rgba(231,169,162,0.15);
+}
+
+.contact-section input::placeholder,
+.contact-section textarea::placeholder {
+  color: var(--gray-400);
 }
 
 .contact-section textarea {
-    resize: vertical;
-    min-height: 120px;
+  resize: vertical;
+  min-height: 130px;
+  line-height: 1.6;
 }
 
 .contact-section button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 4px;
+  width: 100%;
+  padding: 14px;
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--blush), var(--rose-deep));
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-slow);
+  box-shadow: 0 6px 24px rgba(196,123,114,0.35);
+  margin-top: var(--space-3);
+  letter-spacing: 0.02em;
 }
 
 .contact-section button[type="submit"]:hover {
-    background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(196,123,114,0.45);
 }
 
-/* Responsive Design */
-
+/* Responsive */
 @media (max-width: 768px) {
-    .contact-section.container {
-        padding: 0 10px;
-    }
+  .contact-section {
+    padding: var(--space-12) var(--space-5);
+    align-items: flex-start;
+  }
 
-    .contact-sectionform {
-        padding: 15px;
-    }
-
-    .contact-sectioninput[type="email"],
-    .contact-section input[type="text"],
-    .contact-section textarea {
-        padding: 10px;
-    }
-
-    .contact-section button[type="submit"] {
-        padding: 12px 20px;
-    }
+  .contact-section form {
+    padding: var(--space-7) var(--space-5);
+  }
 }

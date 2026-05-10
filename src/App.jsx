@@ -25,6 +25,8 @@ import { AuthenticateProvider } from "./Context_API/Authentication";
 import { useLoadingContext } from "./Context_API/LoadingContext";
 import ScrollToTop from "./Components/Others/ScrollToTop";
 
+import "./CSS/tailwind.css"
+import "./CSS/luxury-theme.css"
 import "./CSS/userPanel.css"
 import "./CSS/account.css"
 import "./CSS/general.css"
@@ -52,6 +54,9 @@ import "./CSS/cancellationRefunding.css"
 import "./CSS/batchAttendance.css"
 import "./CSS/punchIn.css"
 import "./CSS/attendance.css"
+import "./CSS/resumeScanner.css"
+import "./CSS/careerBot.css"
+import "./CSS/mockExamBot.css"
 import TermsAndConditions from "./Pages/TermsAndCondition";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import CancellationRefundPolicy from "./Pages/CancellationRefundingPolicy";
@@ -60,8 +65,8 @@ import PunchIn from "./Pages/punchIn";
 import PunchOut from "./Pages/punchOut";
 
 
-// axios.defaults.baseURL = "http://localhost:8000/api/v1/"
-axios.defaults.baseURL = "/api/v1/"
+axios.defaults.baseURL = "http://localhost:8000/api/v1/"
+// axios.defaults.baseURL = "/api/v1/"
 
 const App = () => {
 

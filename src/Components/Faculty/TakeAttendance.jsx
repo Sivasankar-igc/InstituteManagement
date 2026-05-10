@@ -44,7 +44,7 @@ export default ({ instituteId, deptName, deptId, subjects }) => {
     const getAttendanceInfo = (subject) => {
         const encodedPaperName = encodeURIComponent(subject)
         setCanTakeAttendance(true)
-        setPaper(encodedPaperName)
+        setPaper(subject)
 
         axios.get(`attendance/getAttendanceInfo/${instituteId}/${deptId}/${encodedPaperName}/${year}/${months[selectedMonth]}`)
             .then(res => {
@@ -198,7 +198,7 @@ export default ({ instituteId, deptName, deptId, subjects }) => {
                                                         const isCurrentMonth =
                                                             selectedYear === year && selectedMonth === monthIndex;
 
-                                                        const shouldEnableCheckbox = isCurrentMonth && d === todayDate;
+                                                        const shouldEnableCheckbox = !admin && isCurrentMonth && d === todayDate;
 
                                                         return (
                                                             <td
@@ -220,9 +220,13 @@ export default ({ instituteId, deptName, deptId, subjects }) => {
                                     </table>
                                 </div>
 
-                                <button className="submitMonthlyBtn" onClick={handleSubmit}>
-                                    Submit Attendance ✅
-                                </button>
+                                {
+                                    admin
+                                        ? <></>
+                                        : <button className="submitMonthlyBtn" onClick={handleSubmit}>
+                                            Submit Attendance ✅
+                                        </button>
+                                }
                             </div>
                     }
                 </div>

@@ -1,101 +1,223 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
+/* ── Luxury Dashboard / User Panel ── */
 
-/* General styling for the container */
 .user-panel {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+  display: flex;
+  min-height: calc(100vh - 72px);
+  background: var(--gray-50);
+  font-family: var(--font-body);
 }
 
-
-/* Styling for the hamburger menu */
+/* ── Hamburger Menu (mobile top bar) ── */
 .user-panel .hamburger-menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #343a40;
-    color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 72px;
+  z-index: 100;
+  box-shadow: var(--shadow-xs);
+}
+
+.user-panel .hamburger-menu-title {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gray-800);
 }
 
 .user-panel .hamburger-button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--peach-bg);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--rose-deep);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
 }
 
-/* Hide sidebar by default*/
+.user-panel .hamburger-button:hover {
+  background: var(--blush-light);
+  transform: scale(1.05);
+}
+
+/* ── Sidebar ── */
 .user-panel .sidebar {
-    display: none;
-    width: calc(100% - 40px);
-    background-color: #343a40;
-    color: #ffffff;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: none;
+  width: 280px;
+  min-width: 280px;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  padding: var(--space-8) var(--space-5);
+  flex-direction: column;
+  gap: var(--space-2);
+  overflow-y: auto;
+  position: sticky;
+  top: 72px;
+  height: calc(100vh - 72px);
+  box-shadow: var(--shadow-sm);
 }
 
-
-/* Show sidebar when active */
-.sidebar.active {
-    display: block;
+.user-panel .sidebar.active {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 200;
+  animation: slideInLeft 0.25s ease;
 }
 
-/* Side bar contents design*/
-
+/* Sidebar Header */
 .user-panel .sidebar h2 {
-    color: #ffffff;
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--gray-800);
+  padding: 0 var(--space-3);
+  margin-bottom: var(--space-6);
+  letter-spacing: -0.02em;
 }
 
-.user-panel .sidebar button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    border-radius: 4px;
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-3);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
 }
 
-.user-panel .sidebar button:hover {
-    background-color: #0056b3;
+.sidebar-brand-icon {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--blush), var(--rose-deep));
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  flex-shrink: 0;
 }
 
+.sidebar-brand-text {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gray-800);
+}
+
+.sidebar-section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  padding: var(--space-4) var(--space-3) var(--space-2);
+}
+
+/* Sidebar Buttons */
+.user-panel .sidebar button,
+.user-panel .sidebar .panel-buttton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: 11px var(--space-4);
+  font-family: var(--font-primary);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.user-panel .sidebar button:hover,
+.user-panel .sidebar .panel-buttton:hover {
+  background: var(--peach-bg);
+  color: var(--rose-deep);
+  transform: translateX(3px);
+}
+
+.user-panel .sidebar button.active,
+.user-panel .sidebar .panel-buttton.active {
+  background: linear-gradient(135deg, rgba(231,169,162,0.18), rgba(212,163,152,0.12));
+  color: var(--rose-deep);
+  font-weight: 700;
+  border-left: 3px solid var(--rose-deep);
+}
+
+/* Danger sidebar button */
+.user-panel .sidebar button.danger-btn {
+  color: var(--danger);
+  margin-top: auto;
+}
+
+.user-panel .sidebar button.danger-btn:hover {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+/* Sidebar overlay (mobile) */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 199;
+  backdrop-filter: blur(2px);
+}
+
+.sidebar-overlay.active { display: block; }
+
+/* ── Main Content ── */
 .user-panel .main-content {
-    padding: 20px;
-    background-color: #f8f9fa;
-    overflow-y: auto;
-    flex: 1;
+  flex: 1;
+  padding: var(--space-8);
+  overflow-y: auto;
+  background: var(--gray-50);
+  animation: fadeIn 0.4s ease;
 }
 
+/* ── Desktop Layout ── */
 @media (min-width: 930px) {
-    .user-panel {
-        flex-direction: row;
-    }
+  .user-panel {
+    flex-direction: row;
+  }
 
-    .user-panel .hamburger-menu {
-        display: none;
-    }
+  .user-panel .hamburger-menu {
+    display: none;
+  }
 
-    .user-panel .sidebar {
-        display: block;
-        width: 20%;
-    }
+  .user-panel .sidebar {
+    display: flex;
+    position: sticky;
+  }
 
-    .user-panel .main-content {
-        width: 80%;
-    }
+  .user-panel .main-content {
+    padding: var(--space-10);
+  }
 }
 
-.user-panel .panel-buttton.active {
-    background-color: #0056b3;
-    transform: scale(.96);
+@media (max-width: 929px) {
+  .user-panel {
+    flex-direction: column;
+  }
+
+  .user-panel .main-content {
+    padding: var(--space-5);
+  }
 }

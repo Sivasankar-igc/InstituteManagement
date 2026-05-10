@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Poppins', 'Outfit', sans-serif;
+    background-color: #FBF8F5;
+    color: #3D3330;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: #F5F0ED; }
+  ::-webkit-scrollbar-thumb { background: #E7A9A2; border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: #C47B72; }
+}
+
+@layer components {
+  /* ── Luxury Button Base ── */
+  .btn-luxury {
+    @apply inline-flex items-center justify-center gap-2 font-outfit font-semibold text-sm
+           px-6 py-3 rounded-full border-none cursor-pointer transition-all duration-300
+           relative overflow-hidden select-none;
+  }
+  .btn-luxury:hover { @apply -translate-y-0.5; }
+  .btn-luxury:active { @apply translate-y-0; }
+  .btn-luxury:disabled { @apply opacity-50 cursor-not-allowed translate-y-0; }
+
+  .btn-primary {
+    @apply btn-luxury bg-gradient-to-br from-blush to-rose text-white shadow-luxury;
+  }
+  .btn-primary:hover { @apply shadow-luxury-lg; }
+
+  .btn-secondary {
+    @apply btn-luxury bg-white text-rose border border-blush shadow-luxury-sm;
+  }
+  .btn-secondary:hover { @apply bg-peach; }
+
+  .btn-ghost {
+    @apply btn-luxury bg-transparent text-gray-600 border border-gray-200;
+  }
+  .btn-ghost:hover { @apply bg-gray-50 border-blush text-rose; }
+
+  .btn-danger {
+    @apply btn-luxury bg-gradient-to-br from-red-400 to-red-600 text-white;
+  }
+  .btn-success {
+    @apply btn-luxury bg-gradient-to-br from-emerald-400 to-emerald-600 text-white;
+  }
+  .btn-info {
+    @apply btn-luxury bg-gradient-to-br from-sky-400 to-sky-600 text-white;
+  }
+  .btn-violet {
+    @apply btn-luxury bg-gradient-to-br from-violet-400 to-violet-600 text-white;
+  }
+  .btn-sm { @apply px-4 py-2 text-xs; }
+  .btn-lg { @apply px-8 py-4 text-base; }
+  .btn-icon { @apply p-2.5 rounded-xl; }
+  .btn-icon-round { @apply p-2.5 rounded-full w-10 h-10; }
+
+  /* ── Luxury Card ── */
+  .card-luxury {
+    @apply bg-white rounded-3xl border border-gray-100 shadow-luxury-sm
+           transition-all duration-300 overflow-hidden;
+  }
+  .card-luxury:hover { @apply shadow-luxury-lg -translate-y-1 border-blush-light; }
+
+  /* ── Glass Card ── */
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl border border-white/50 rounded-3xl shadow-luxury;
+  }
+
+  /* ── Luxury Input ── */
+  .input-luxury {
+    @apply w-full px-4 py-3 font-poppins text-sm text-gray-800 bg-gray-50
+           border border-gray-200 rounded-xl outline-none
+           transition-all duration-200 placeholder-gray-400;
+  }
+  .input-luxury:focus {
+    @apply bg-white border-blush ring-4 ring-blush/15;
+  }
+  .input-luxury:disabled {
+    @apply bg-gray-100 text-gray-500 cursor-not-allowed;
+  }
+
+  /* ── Section Label ── */
+  .section-label {
+    @apply inline-block text-xs font-semibold tracking-widest uppercase
+           text-rose bg-peach px-4 py-1.5 rounded-full mb-4;
+  }
+
+  /* ── Gradient Text ── */
+  .gradient-text {
+    @apply bg-gradient-to-r from-blush to-rose bg-clip-text text-transparent;
+  }
+
+  /* ── Luxury Divider ── */
+  .luxury-divider {
+    @apply h-px bg-gradient-to-r from-transparent via-blush-light to-transparent border-none my-8;
+  }
+
+  /* ── Badge ── */
+  .badge { @apply inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full; }
+  .badge-primary { @apply bg-peach text-rose; }
+  .badge-success { @apply bg-emerald-50 text-emerald-700; }
+  .badge-danger  { @apply bg-red-50 text-red-600; }
+  .badge-warning { @apply bg-amber-50 text-amber-700; }
+  .badge-info    { @apply bg-sky-50 text-sky-700; }
+
+  /* ── Skeleton ── */
+  .skeleton {
+    @apply bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-shimmer;
+    background-size: 800px 100%;
+  }
+
+  /* ── Sidebar Item ── */
+  .sidebar-item {
+    @apply flex items-center gap-3 w-full px-4 py-2.5 text-sm font-medium text-gray-600
+           bg-transparent border-none rounded-xl cursor-pointer transition-all duration-200 text-left;
+  }
+  .sidebar-item:hover { @apply bg-peach text-rose translate-x-0.5; }
+  .sidebar-item.active {
+    @apply bg-gradient-to-r from-blush/20 to-peach/30 text-rose font-semibold
+           border-l-[3px] border-rose;
+  }
+  .sidebar-item.danger { @apply text-red-500; }
+  .sidebar-item.danger:hover { @apply bg-red-50 text-red-600; }
+
+  /* ── Form Group ── */
+  .form-group-luxury { @apply mb-5; }
+  .form-label-luxury {
+    @apply block text-xs font-semibold tracking-wider uppercase text-gray-500 mb-2;
+  }
+
+  /* ── Table Luxury ── */
+  .table-luxury { @apply w-full border-collapse font-poppins text-sm; }
+  .table-luxury thead th {
+    @apply px-4 py-3 text-left text-xs font-bold tracking-wider uppercase
+           text-rose bg-gradient-to-r from-peach to-blush-light/50 border-b-2 border-blush-light;
+  }
+  .table-luxury tbody tr {
+    @apply border-b border-gray-50 transition-colors duration-150;
+  }
+  .table-luxury tbody tr:hover { @apply bg-peach/30; }
+  .table-luxury tbody td { @apply px-4 py-3 text-gray-700; }
+
+  /* ── Page Header ── */
+  .page-header {
+    @apply flex flex-col items-center text-center mb-10;
+  }
+  .page-header h2 {
+    @apply text-2xl font-extrabold text-gray-800 tracking-tight relative pb-3;
+  }
+  .page-header h2::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-0.5
+           bg-gradient-to-r from-blush to-rose rounded-full;
+  }
+
+  /* ── Dashboard Content Card ── */
+  .dash-card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-luxury-sm overflow-hidden;
+  }
+  .dash-card-header {
+    @apply h-1 bg-gradient-to-r from-blush to-rose;
+  }
+
+  /* ── CTA Button with Shine Animation ── */
+  .btn-cta-shine {
+    @apply relative overflow-hidden;
+  }
+  .btn-cta-shine::after {
+    content: '';
+    @apply absolute top-0 -left-full w-1/2 h-full
+           bg-gradient-to-r from-transparent via-white/30 to-transparent
+           skew-x-12;
+    transition: left 0.6s ease;
+  }
+  .btn-cta-shine:hover::after {
+    left: 150%;
+  }
+
+  /* ── Status Indicator ── */
+  .status-dot {
+    @apply w-2 h-2 rounded-full flex-shrink-0;
+  }
+  .status-dot.online  { @apply bg-emerald-400; }
+  .status-dot.offline { @apply bg-gray-300; }
+  .status-dot.warning { @apply bg-amber-400; }
+
+  /* ── AI Feature Card ── */
+  .ai-card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-luxury-sm p-6
+           transition-all duration-300 cursor-pointer;
+  }
+  .ai-card:hover {
+    @apply shadow-luxury -translate-y-1 border-blush-light;
+  }
+}

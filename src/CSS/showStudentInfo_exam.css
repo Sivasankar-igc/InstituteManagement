@@ -1,73 +1,113 @@
-/* ExamContent.css */
+/* ── Luxury Exam Student Info ── */
 
 .exam-content {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: var(--font-body);
+  margin: var(--space-5);
+  padding: var(--space-7);
+  background: var(--gray-50);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  animation: fadeIn 0.4s ease;
 }
 
 .student-info {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+  background: var(--white);
+  padding: var(--space-8);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  margin-bottom: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.student-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blush), var(--rose-deep), var(--nude));
 }
 
 .student-info h2 {
-    text-align: center;
-    color: #4CAF50;
-    margin-bottom: 20px;
+  text-align: center;
+  color: var(--rose-deep);
+  margin-bottom: var(--space-6);
+  font-family: var(--font-primary);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .student-info p {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  margin-bottom: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .student-info p strong {
-    color: #4CAF50;
+  color: var(--rose-deep);
+  font-weight: 700;
+  min-width: 120px;
 }
 
 .student-info .confirm-btn {
-    display: block;
-    min-width: 200px;
-    width: 30%;
-    padding: 12px 0;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    margin-top: 20px;
-    margin-left: 35%;
+  display: block;
+  width: fit-content;
+  min-width: 200px;
+  padding: 13px 32px;
+  background: linear-gradient(135deg, #8ECBA8, #5FA882);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  margin: var(--space-6) auto 0;
+  transition: all var(--transition-slow);
+  box-shadow: 0 4px 16px rgba(95,168,130,0.30);
+  letter-spacing: 0.02em;
 }
 
 .student-info .confirm-btn:hover {
-    background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(95,168,130,0.40);
 }
 
 .message {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: var(--space-6);
+  font-size: 0.95rem;
+  color: var(--gray-600);
 }
 
 .done-btn {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+  padding: 12px 32px;
+  background: linear-gradient(135deg, #8ECBA8, #5FA882);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: all var(--transition-slow);
+  box-shadow: 0 4px 16px rgba(95,168,130,0.30);
 }
 
 .done-btn:hover {
-    background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(95,168,130,0.40);
 }

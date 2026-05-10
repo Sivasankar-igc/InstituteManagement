@@ -1,109 +1,209 @@
-/* Premium Page Styles */
+/* ── Luxury Premium Plans Page ── */
+
 .premium-page {
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-    margin: 20px;
+  padding: var(--space-10) var(--space-5);
+  font-family: var(--font-body);
+  animation: fadeIn 0.4s ease;
 }
 
 .premium-header {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 10px;
+  font-family: var(--font-primary);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--gray-800);
+  text-align: center;
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.02em;
 }
 
 .premium-subtext {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 20px;
+  font-size: 0.95rem;
+  color: var(--gray-500);
+  text-align: center;
+  margin-bottom: var(--space-8);
 }
 
-.premium-status {
-    font-size: 1rem;
-    color: #ff6b6b;
-    margin-bottom: 30px;
+/* Current Plan Section */
+.user-premium-section {
+  margin-bottom: var(--space-10);
+  text-align: center;
 }
 
-/* Card Container */
+.user-premium-section h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gray-700);
+  margin-bottom: var(--space-5);
+}
+
+/* Available Plans */
+.available-premium-section {
+  text-align: center;
+}
+
+.available-premium-section h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gray-700);
+  margin-bottom: var(--space-6);
+}
+
+/* Cards Container */
 .premium-cards-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
 }
 
-/* Individual Premium Card Styles */
-/* Adjustments for dynamic background colors */
+/* Individual Card */
 .premium-card {
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    padding: 20px;
-    text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    color: #333;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  width: 300px;
+  padding: var(--space-8);
+  text-align: left;
+  transition: all var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blush), var(--rose-deep), var(--nude));
 }
 
 .premium-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--blush-light);
 }
 
-/* Keep text styles consistent against different background colors */
+/* Duration */
 .card-duration {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
+  font-family: var(--font-primary);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--gray-800);
+  text-align: center;
+  margin-bottom: var(--space-5);
+  letter-spacing: -0.02em;
 }
 
+/* Price */
 .card-price {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    gap: 10px;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
 }
 
 .original-price {
-    font-size: 1rem;
-    color: #888;
-    text-decoration: line-through;
+  font-size: 0.95rem;
+  color: var(--gray-400);
+  text-decoration: line-through;
 }
 
 .discounted-price {
-    font-size: 1.5rem;
-    font-weight: bold;
+  font-family: var(--font-primary);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--rose-deep);
+  line-height: 1;
 }
 
+.discounted-price::before {
+  content: '₹';
+  font-size: 1.1rem;
+  vertical-align: super;
+  font-weight: 600;
+}
+
+/* Discount Badge */
 .card-discount {
-    font-size: 1rem;
-    margin-bottom: 15px;
-    text-align: center;
+  text-align: center;
+  margin-bottom: var(--space-6);
 }
 
+.card-discount span {
+  display: inline-block;
+  background: var(--success-bg);
+  color: #4A8A6A;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+/* Benefits */
 .card-benefits {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin-bottom: 20px;
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--space-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
 .card-benefits li {
-    margin-bottom: 5px;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  line-height: 1.5;
 }
 
+.card-benefits li::before {
+  content: '✓';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: var(--success-bg);
+  color: #4A8A6A;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Upgrade Button */
 .upgrade-button {
-    display: block;
-    width: 100%;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.4s ease;
+  display: block;
+  width: 100%;
+  background: linear-gradient(135deg, var(--blush), var(--rose-deep));
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 13px;
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-slow);
+  box-shadow: 0 4px 16px rgba(196,123,114,0.30);
+  letter-spacing: 0.02em;
 }
 
 .upgrade-button:hover {
-    background-color: #0056b3;
-    transform: scale(.92);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196,123,114,0.40);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .premium-page { padding: var(--space-8) var(--space-4); }
+  .premium-card { width: 100%; max-width: 340px; }
 }

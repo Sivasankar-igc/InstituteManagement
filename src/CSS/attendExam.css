@@ -1,121 +1,220 @@
-/* ExamAttendingPage.css */
+/* ── Luxury Attend Exam Page ── */
 
 .exam-attending-page {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 10px;
+  font-family: var(--font-body);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-8);
+  animation: fadeIn 0.4s ease;
 }
 
+/* Exam Details Card */
 .exam-attending-page .exam-details-card {
-    display: grid;
-    grid-template-columns: 1fr .5fr;
-    gap: 10px;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  background: var(--white);
+  padding: var(--space-7);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  margin-bottom: var(--space-8);
+  position: relative;
+  overflow: hidden;
+}
+
+.exam-attending-page .exam-details-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blush), var(--rose-deep), var(--nude));
 }
 
 .exam-attending-page .exam-details-card .exam-detail-item {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3);
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
 }
 
 .exam-attending-page .exam-details-card .exam-detail-item .icon {
-    font-size: 24px;
-    color: #4CAF50;
-    margin-right: 15px;
+  font-size: 1.4rem;
+  color: var(--rose-deep);
+  width: 40px;
+  height: 40px;
+  background: var(--peach-bg);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .exam-attending-page .exam-details-card .exam-detail-item .detail-title {
-    font-size: 16px;
-    color: #888;
-    margin-bottom: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin-bottom: 3px;
 }
 
 .exam-attending-page .exam-details-card .exam-detail-item .detail-value {
-    font-size: 16px;
-    -webkit-text-stroke: .4pt;
-    color: #333;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gray-800);
 }
 
+/* Timer */
 .exam-attending-page .exam-details-card .exam-timer {
-    grid-column: span 2;
-    text-align: center;
-    margin-top: 20px;
+  grid-column: span 2;
+  text-align: center;
+  padding: var(--space-5);
+  background: linear-gradient(135deg, var(--peach-bg), var(--cream));
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--blush-light);
 }
 
 .exam-attending-page .exam-details-card .exam-timer .detail-title {
-    font-size: 14pt;
-    -webkit-text-stroke: .4pt;
-    letter-spacing: .4pt;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+  margin-bottom: var(--space-2);
 }
 
 .exam-attending-page .exam-details-card .exam-timer .detail-value {
-    font-size: 16pt;
-    margin-top: 10px;
+  font-family: var(--font-primary);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--rose-deep);
+  letter-spacing: 0.05em;
 }
 
+/* Questions */
 .exam-attending-page .question .question-item {
-    margin-bottom: 15px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #9c9b9b1c;
+  margin-bottom: var(--space-5);
+  padding: var(--space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-base);
+}
+
+.exam-attending-page .question .question-item:hover {
+  border-color: var(--blush-light);
+  box-shadow: var(--shadow-sm);
 }
 
 .exam-attending-page .question .question-item .question-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
 }
 
 .exam-attending-page .question .question-item .question-header .question-index {
-    font-size: 18px;
-    margin-right: 10px;
-    font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--blush), var(--rose-deep));
+  color: var(--white);
+  border-radius: var(--radius-full);
+  font-family: var(--font-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .exam-attending-page .question .question-item .question-header .question-text {
-    font-size: 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  line-height: 1.5;
+  padding-top: 5px;
 }
 
-.exam-attending-page .question .question-item .options {
-    margin-top: 10px;
-}
+/* Options */
+.exam-attending-page .question .question-item .options { margin-top: var(--space-3); }
 
 .exam-attending-page .question .question-item .options .option-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.exam-attending-page .question .question-item .options .option-item:hover {
+  background: var(--peach-bg);
+  border-color: var(--blush);
 }
 
 .exam-attending-page .question .question-item .options .option-item .option-input {
-    margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--rose-deep);
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .exam-attending-page .question .question-item .options .option-item .option-text {
-    font-size: 14px;
+  font-size: 0.875rem;
+  color: var(--gray-700);
 }
 
+/* Submit */
 .exam-attending-page .question .btn-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-10);
 }
 
 .submit-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 15px 60px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
+  padding: 15px 60px;
+  background: linear-gradient(135deg, #8ECBA8, #5FA882);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-slow);
+  box-shadow: 0 6px 24px rgba(95,168,130,0.35);
+  letter-spacing: 0.02em;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(95,168,130,0.45);
 }
 
 .submit-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  background: var(--gray-200);
+  color: var(--gray-400);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .exam-attending-page { padding: var(--space-5); }
+  .exam-attending-page .exam-details-card { grid-template-columns: 1fr; }
+  .exam-attending-page .exam-details-card .exam-timer { grid-column: span 1; }
 }

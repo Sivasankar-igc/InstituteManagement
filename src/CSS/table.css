@@ -1,36 +1,116 @@
+/* ── Luxury Data Tables ── */
+
 .table-div {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  background: var(--white);
 }
 
 table {
-    border: hidden black;
-    border-radius: 10px;
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-    box-shadow: 0 0 0 2px black;
-    overflow: hidden;
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
+/* Header */
 thead {
-    text-align: center;
+  background: linear-gradient(135deg, var(--peach-bg), var(--blush-light));
 }
 
-tbody {
-    text-align: center;
+thead tr th {
+  padding: 14px 18px;
+  text-align: left;
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+  border-bottom: 2px solid var(--blush-light);
+  white-space: nowrap;
 }
 
-td,
-th {
-    padding: 8px 0;
-    border: 1px solid black;
+thead tr th:first-child { border-radius: var(--radius-lg) 0 0 0; }
+thead tr th:last-child  { border-radius: 0 var(--radius-lg) 0 0; }
+
+/* Body */
+tbody tr {
+  border-bottom: 1px solid var(--gray-100);
+  transition: background var(--transition-fast);
 }
 
-th{
-    background-color: aqua;
+tbody tr:last-child { border-bottom: none; }
+
+tbody tr:hover {
+  background: var(--gray-50);
 }
 
-table button.table-btn{
-    margin: 0 3px;
+tbody tr:nth-child(even) {
+  background: rgba(241,219,213,0.12);
+}
+
+tbody tr:nth-child(even):hover {
+  background: var(--gray-50);
+}
+
+td, th {
+  padding: 13px 18px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+td {
+  color: var(--gray-700);
+  font-size: 0.875rem;
+}
+
+/* Table Buttons */
+table button.table-btn {
+  margin: 0 3px;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+table button.table-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Empty Table */
+.table-empty {
+  text-align: center;
+  padding: var(--space-12);
+  color: var(--gray-400);
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .table-div {
+    border-radius: var(--radius-md);
+  }
+
+  td, th {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
+
+  thead tr th {
+    font-size: 0.7rem;
+    padding: 10px 12px;
+  }
 }

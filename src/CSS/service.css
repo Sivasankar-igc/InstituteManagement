@@ -1,144 +1,232 @@
-/* General Styling */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
-}
+/* ── Luxury Services Page ── */
 
 .service-page {
-  padding: 20px;
+  font-family: var(--font-body);
+  overflow-x: hidden;
 }
 
+/* Header */
 .service-header {
   text-align: center;
-  margin-bottom: 40px;
+  padding: var(--space-20) var(--space-8) var(--space-16);
+  background: linear-gradient(135deg, var(--peach-bg) 0%, var(--cream) 60%, var(--blush-light) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-header::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: -80px;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(231,169,162,0.18) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .service-logo {
-  width: 250px;
-  height: 50px;
+  width: 180px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto var(--space-5);
 }
 
 .service-title {
-  font-size: 2.5rem;
-  color: #4a90e2;
-  margin-top: 10px;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--gray-800);
+  margin-bottom: var(--space-4);
+  letter-spacing: -0.03em;
 }
 
 .service-tagline {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: var(--gray-600);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
 }
 
 /* Cards Section */
 .service-cards {
-  margin-bottom: 40px;
+  padding: var(--space-16) var(--space-8);
+  background: var(--white);
+}
+
+.service-cards:nth-child(even) {
+  background: var(--gray-50);
 }
 
 .section-heading {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--gray-800);
   text-align: center;
-  color: #333;
+  margin-bottom: var(--space-10);
+  letter-spacing: -0.02em;
+  position: relative;
+  padding-bottom: var(--space-4);
+}
+
+.section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blush), var(--rose-deep));
+  border-radius: var(--radius-full);
 }
 
 .service-card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .service-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 350px;
-  padding: 20px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-8);
   text-align: left;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all var(--transition-slow);
+  position: relative;
+  overflow: hidden;
 }
 
-.service-card h3 {
-  font-size: 1.5rem;
-  color: #4a90e2;
-  margin-bottom: 10px;
-}
-
-.service-card p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-}
-
-.service-card ul {
-  margin: 10px 0 0;
-  padding-left: 20px;
-  color: #555;
-}
-
-.service-card ul li {
-  margin-bottom: 8px;
-  line-height: 1.4;
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blush), var(--rose-deep));
+  opacity: 0;
+  transition: opacity var(--transition-base);
 }
 
 .service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--blush-light);
 }
 
+.service-card:hover::before { opacity: 1; }
+
+.service-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: var(--space-4);
+  letter-spacing: -0.01em;
+}
+
+.service-card p {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+.service-card ul {
+  margin: var(--space-3) 0 0;
+  padding-left: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.service-card ul li {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  line-height: 1.5;
+}
+
+.service-card ul li::marker { color: var(--rose-deep); }
+
 /* Premium Section */
+.service-premium {
+  padding: var(--space-16) var(--space-8);
+  background: linear-gradient(135deg, var(--peach-bg), var(--cream));
+  max-width: 100%;
+}
+
+.service-premium > * {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .service-premium h2 {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
-  color: #d9534f;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--gray-800);
+  margin-bottom: var(--space-5);
+  letter-spacing: -0.02em;
 }
 
 .service-premium p {
-  font-size: 1.1rem;
-  color: #555;
-  line-height: 1.6;
+  font-size: 1rem;
+  color: var(--gray-600);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
 }
 
 .service-premium ul {
-  padding-left: 20px;
+  padding-left: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
 
 .service-premium ul li {
-  margin-bottom: 10px;
-  color: #333;
+  font-size: 0.95rem;
+  color: var(--gray-700);
+  line-height: 1.65;
+}
+
+.service-premium ul li::marker { color: var(--rose-deep); }
+
+.service-premium ul li strong {
+  color: var(--gray-800);
+  font-weight: 700;
 }
 
 /* Footer */
 .service-footer {
   text-align: center;
-  padding: 20px 0;
-  background-color: #4a90e2;
-  color: white;
-  margin-top: 40px;
+  padding: var(--space-8);
+  background: var(--gray-800);
+  color: var(--gray-400);
+  font-size: 0.875rem;
 }
 
 .service-footer a {
-  color: #f9f9f9;
+  color: var(--blush-light);
   text-decoration: none;
 }
 
 .service-footer a:hover {
+  color: var(--white);
   text-decoration: underline;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+  .service-header { padding: var(--space-12) var(--space-5) var(--space-10); }
+  .service-cards { padding: var(--space-10) var(--space-5); }
+  .service-premium { padding: var(--space-10) var(--space-5); }
+  .service-logo { width: 140px; }
+  .service-title { font-size: 1.5rem; }
+}
 
-@media(max-width:400px){
-  .service-logo {
-    width: 80%;
-    height: auto;
-  }
-  .service-title {
-    font-size: 100%;
-    color: #4a90e2;
-    margin-top: 10px;
-  }
+@media (max-width: 400px) {
+  .service-logo { width: 80%; height: auto; }
 }

@@ -1,71 +1,162 @@
-/* Card Container */
+/* ── Luxury User/Role Selection Page ── */
+
 .card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    padding: 20px;
-    flex-wrap: wrap;
-    min-height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-16) var(--space-8);
+  flex-wrap: wrap;
+  min-height: 85vh;
+  background: linear-gradient(135deg, var(--peach-bg) 0%, var(--cream) 60%, var(--blush-light) 100%);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Card Style */
+.card-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(231,169,162,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Role Card */
 .card {
-    width: 300px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    background-color: #fff;
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 280px;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  transition: all var(--transition-slow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
-/* Hover Effect */
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blush), var(--rose-deep));
+  opacity: 0;
+  transition: opacity var(--transition-base);
 }
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--blush-light);
+}
+
+.card:hover::before { opacity: 1; }
 
 /* Card Image */
+.card-image-wrapper {
+  width: 80px;
+  height: 80px;
+  background: var(--peach-bg);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+}
+
+.card:hover .card-image-wrapper {
+  background: linear-gradient(135deg, var(--blush-light), var(--peach-mid));
+}
+
 .card-image {
-    width: 35%;
-    height: 100px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    margin-left: 30%;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
 
-/* Card Title */
+/* Card Text */
 .card h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  letter-spacing: -0.01em;
 }
 
-/* Card Description */
 .card p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 20px;
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  line-height: 1.5;
 }
 
 /* Card Button */
 .card-btn {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-    text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 28px;
+  background: linear-gradient(135deg, var(--blush), var(--rose-deep));
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-primary);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--transition-slow);
+  box-shadow: 0 4px 16px rgba(196,123,114,0.30);
+  width: 100%;
+  margin-top: var(--space-2);
 }
 
 .card-btn:hover {
-    background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196,123,114,0.40);
+  color: var(--white);
+}
+
+/* Page Title */
+.role-page-header {
+  text-align: center;
+  padding: var(--space-12) var(--space-8) 0;
+  background: linear-gradient(135deg, var(--peach-bg), var(--cream));
+}
+
+.role-page-header h1 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--gray-800);
+  margin-bottom: var(--space-3);
+}
+
+.role-page-header p {
+  font-size: 1rem;
+  color: var(--gray-500);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-container {
+    padding: var(--space-10) var(--space-5);
+    gap: var(--space-5);
+  }
+
+  .card { width: 100%; max-width: 320px; }
+}
+
+@media (max-width: 480px) {
+  .card { width: 100%; }
 }

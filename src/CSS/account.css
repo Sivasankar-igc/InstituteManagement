@@ -1,106 +1,168 @@
-/*General styling for the container*/
+/* ── Luxury Account / Profile Forms ── */
 
 .account-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.4s ease;
 }
 
-/*Account Contents*/
+/* Form Card */
 .account-container .account-form {
-    width: 100%;
-    max-width: 600px;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 640px;
+  background: var(--white);
+  padding: var(--space-8);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
 }
 
+.account-container .account-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blush), var(--rose-deep), var(--nude));
+}
+
+/* Form Groups */
 .account-container .account-form .form-group {
-    margin-bottom: 10px;
+  margin-bottom: var(--space-5);
 }
 
 .account-container .account-form .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+  margin-bottom: 8px;
 }
 
 .account-container .account-form .form-group input,
 .account-container .account-form .form-group select,
 .account-container .account-form .form-group textarea {
-    width: 95%;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
+  width: 100%;
+  padding: 13px 18px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: var(--gray-50);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: all var(--transition-base);
+  box-sizing: border-box;
+  appearance: none;
 }
 
+.account-container .account-form .form-group input:focus,
+.account-container .account-form .form-group select:focus,
+.account-container .account-form .form-group textarea:focus {
+  background: var(--white);
+  border-color: var(--blush);
+  box-shadow: 0 0 0 4px rgba(231,169,162,0.15);
+}
+
+.account-container .account-form .form-group input:disabled,
+.account-container .account-form .form-group select:disabled,
+.account-container .account-form .form-group textarea:disabled {
+  background: var(--gray-100);
+  color: var(--gray-600);
+  cursor: not-allowed;
+  border-color: var(--gray-200);
+}
+
+.account-container .account-form .form-group input::placeholder {
+  color: var(--gray-400);
+}
+
+/* Edit Buttons */
 .account-container .account-form .edit-buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
 }
 
-.account-container .account-form button {
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    margin: 0 5px;
-}
-
-@media (max-width:320px) {
-    .account-container .account-form .edit-buttons {
-        justify-content: center;
-    }
-
-    .account-container .account-form .edit-buttons button {
-        padding: 10px 2dvw;
-        margin: 0 2dvw;
-    }
-}
-
+/* Select Container */
 .account-container .account-form div.select-container {
-    margin: 10px 0;
+  margin: var(--space-4) 0;
 }
 
 .account-container .account-form div.select-container .select-item {
-    margin: 10px 0;
+  margin: var(--space-3) 0;
 }
 
 .account-container .account-form select {
-    width: 80%;
-    height: 35px;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding-left: 5px;
-    margin-right: 5px;
-    outline: none;
+  width: 100%;
+  height: 46px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0 var(--space-4);
+  outline: none;
+  background: var(--gray-50);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-base);
 }
 
-.account-container .account-form select:disabled{
-    color: black;
-    -webkit-text-stroke: .4pt;
+.account-container .account-form select:focus {
+  border-color: var(--blush);
+  box-shadow: 0 0 0 4px rgba(231,169,162,0.15);
+  background: var(--white);
 }
 
+.account-container .account-form select:disabled {
+  color: var(--gray-700);
+  background: var(--gray-100);
+  cursor: not-allowed;
+}
+
+/* Back Button */
 .account-container .account-form .back-btn {
-    margin-bottom: 15px;
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
+  margin-bottom: var(--space-5);
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
 }
 
 .account-container .account-form .back-btn button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 100%;
-    text-align: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  text-align: center;
+  background: var(--peach-bg);
+  color: var(--rose-deep);
+  border: 1px solid var(--blush-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (max-width:390px){
-    .account-container .account-form select{
-        width: 70%;
-    }
+.account-container .account-form .back-btn button:hover {
+  background: var(--blush-light);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .account-container .account-form {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .account-container .account-form .edit-buttons {
+    justify-content: center;
+  }
 }

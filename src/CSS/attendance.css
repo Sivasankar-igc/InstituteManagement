@@ -1,90 +1,127 @@
+/* ── Luxury Monthly Attendance ── */
+
 .monthlyAttendancePage {
   width: 100%;
   min-height: 90vh;
-  padding: 20px;
-  background: #f9fafb;
+  padding: var(--space-7);
+  background: var(--gray-50);
+  font-family: var(--font-body);
 }
 
 .monthlyTitle {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 15px;
+  font-family: var(--font-primary);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--gray-800);
+  margin-bottom: var(--space-5);
+  letter-spacing: -0.02em;
+}
+
+.attendanceFilterBar {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-end;
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.attendanceFilterBar select {
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  background: var(--white);
+  outline: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  appearance: none;
+}
+
+.attendanceFilterBar select:focus {
+  border-color: var(--blush);
+  box-shadow: 0 0 0 4px rgba(231,169,162,0.15);
 }
 
 .monthlyTableWrap {
   width: 100%;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
   overflow-x: auto;
 }
 
 .monthlyTable {
   width: 100%;
   border-collapse: collapse;
-  min-width: 900px; /* helps scrolling on small screens */
+  min-width: 900px;
+  font-family: var(--font-body);
 }
 
 .monthlyTable th,
 .monthlyTable td {
-  border: 1px solid #eee;
-  padding: 10px;
+  border: 1px solid var(--gray-100);
+  padding: 11px 14px;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.8rem;
 }
 
 .monthlyTable th {
-  background: #111827;
-  color: white;
+  background: linear-gradient(135deg, var(--gray-800), var(--gray-700));
+  color: var(--white);
+  font-family: var(--font-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   position: sticky;
   top: 0;
+}
+
+.tickCell {
+  text-align: center;
 }
 
 .tickCell input {
   width: 16px;
   height: 16px;
   cursor: pointer;
+  accent-color: var(--rose-deep);
+}
+
+.tickCell input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.presentCell {
+  background: var(--success-bg);
+}
+
+.absentCell {
+  background: var(--danger-bg);
 }
 
 .submitMonthlyBtn {
-  margin-top: 15px;
+  margin-top: var(--space-5);
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border: none;
-  background: #16a34a;
-  color: white;
-  font-size: 16px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #8ECBA8, #5FA882);
+  color: var(--white);
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
   cursor: pointer;
+  transition: all var(--transition-slow);
+  box-shadow: 0 4px 16px rgba(95,168,130,0.30);
+  letter-spacing: 0.02em;
 }
 
-.attendanceFilterBar{
-  display:flex;
-  gap:12px;
-  align-items:end;
-  margin-bottom:15px;
-}
-
-.attendanceFilterBar select{
-  padding:8px;
-  border-radius:6px;
-  border:1px solid #ccc;
-  outline:none;
-}
-
-.tickCell{
-  text-align:center;
-}
-
-.presentCell{
-  background:#dcfce7;  /* light green */
-}
-
-.absentCell{
-  background:#fee2e2;  /* light red */
-}
-
-.tickCell input:disabled{
-  cursor:not-allowed;
-  opacity:0.6;
+.submitMonthlyBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(95,168,130,0.40);
 }
