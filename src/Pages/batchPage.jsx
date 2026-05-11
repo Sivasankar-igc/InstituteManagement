@@ -111,7 +111,7 @@ const BatchPage = () => {
         { key: "account", label: "Batch Account", icon: faLayerGroup, onClick: () => setShowField("account"), disabled: isloading || isRemoving },
         { key: "student", label: "Student List", icon: faUsers, onClick: () => setShowField("student"), disabled: isloading || isRemoving },
         { key: "announcement", label: "Announcements", icon: faBullhorn, onClick: () => setShowField("announcement"), disabled: isloading || isRemoving },
-        { key: "puchStatus", label: "Punch Status", icon: faCalendarCheck, onClick: () => setShowField("puchStatus"), disabled: isloading || isRemoving },
+        { key: "punchStatus", label: "Punch Status", icon: faCalendarCheck, onClick: () => setShowField("punchStatus"), disabled: isloading || isRemoving },
         ...(admin ? [
             { key: "createAtt", label: "Create Attendance", icon: faPlus, onClick: () => setCanCreateAttendance(true), disabled: isloading || isRemoving },
             { key: "assignments", label: "Assignments", icon: faClipboardList, onClick: () => setShowField("assignments"), disabled: isloading || isRemoving },

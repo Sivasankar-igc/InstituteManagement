@@ -18,6 +18,24 @@ export default ({ instituteId, deptName, deptId, subjects }) => {
     const monthIndex = now.getMonth(); // 0 = Jan
     const todayDate = now.getDate(); // 1..31
 
+    // Attendance can be taken only until 1 hour after page load/current time.
+    // Example: if opened at 10:00 AM, checkbox is enabled until 11:00 AM.
+
+    const [currentTime, setCurrentTime] = useState(new Date());
+    // Store the time when the component first loads
+    const [attendanceStartTime] = useState(new Date());
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 60000); // update every 1 minute
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const attendanceDeadline = new Date(attendanceStartTime);
+    attendanceDeadline.setHours(attendanceDeadline.getHours() + 1);
+
     // ✅ Total days in current month (handles leap year too)
     const totalDaysInMonth = new Date(year, monthIndex + 1, 0).getDate();
 
@@ -198,7 +216,7 @@ export default ({ instituteId, deptName, deptId, subjects }) => {
                                                         const isCurrentMonth =
                                                             selectedYear === year && selectedMonth === monthIndex;
 
-                                                        const shouldEnableCheckbox = !admin && isCurrentMonth && d === todayDate;
+                                                        const shouldEnableCheckbox = !admin && isCurrentMonth && d === todayDate && currentTime <= attendanceDeadline;
 
                                                         return (
                                                             <td
@@ -223,7 +241,7 @@ export default ({ instituteId, deptName, deptId, subjects }) => {
                                 {
                                     admin
                                         ? <></>
-                                        : <button className="submitMonthlyBtn" onClick={handleSubmit}>
+                                        : <button className="submitMonthlyBtn" onClick={handleSubmit} disabled={currentTime > attendanceDeadline}>
                                             Submit Attendance ✅
                                         </button>
                                 }
