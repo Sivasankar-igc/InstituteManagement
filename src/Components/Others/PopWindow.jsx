@@ -15,7 +15,7 @@ export default ({ children, onClose, onProceed, userType }) => {
     const [password, setPassword] = useState("");
     const passRef = useRef();
 
-    const isSimple = ["Exam", "Assignment", "Paper", "Announcement", "submitExam"].includes(userType);
+    const isSimple = ["Exam", "Assignment", "Paper", "Announcement", "submitExam", "library"].includes(userType);
 
     const checkAdminPassword = () => {
         if (password.trim() === "") {

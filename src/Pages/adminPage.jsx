@@ -6,6 +6,7 @@ import Announcement from "../Components/Announcement";
 import { useNavigate } from "react-router-dom";
 import ShowAdmin from "../Components/ShowAdmin";
 import ShowInstitute from "../Components/ShowInstitute";
+import ShowLibrary from "../Components/Library/ShowLibrary";
 import Premium from "../Components/Premium";
 import { useAuthenticateContext } from "../Context_API/Authentication";
 import axios from "axios";
@@ -15,7 +16,7 @@ import PopWindow from "../Components/Others/PopWindow";
 import DashboardLayout from "../Components/Others/DashboardLayout";
 import {
     faUser, faBuilding, faBullhorn,
-    faLayerGroup, faCrown, faTrash, faRightFromBracket
+    faLayerGroup, faCrown, faTrash, faRightFromBracket, faBook
 } from "@fortawesome/free-solid-svg-icons";
 
 const AdminPage = () => {
@@ -43,6 +44,7 @@ const AdminPage = () => {
         { key: "account",        label: "My Account",       icon: faUser,       onClick: () => setShowField("account") },
         { key: "institute",      label: "Institute Account", icon: faBuilding,   onClick: () => setShowField("institute") },
         { key: "announcement",   label: "Announcements",    icon: faBullhorn,   onClick: () => setShowField("announcement") },
+        { key: "library",        label: "Library",          icon: faBook,       onClick: () => setShowField("library") },
         ...(isSuperAdmin ? [
             { key: "departmentList", label: "Department List", icon: faLayerGroup, onClick: () => setShowField("departmentList") },
             { key: "premium",        label: "Premium Plans",   icon: faCrown,      onClick: () => setShowField("premium") },
@@ -100,6 +102,7 @@ const AdminPage = () => {
                         />
                     )}
                     {showField === "premium" && <Premium />}
+                    {showField === "library" && <ShowLibrary deptId={null} isCentralLibrary={true} />}
                 </DashboardLayout>
             </>
         )

@@ -63,6 +63,7 @@ import CancellationRefundPolicy from "./Pages/CancellationRefundingPolicy";
 import ShippingAndDelivery from "./Pages/ShippingAndDelivery";
 import PunchIn from "./Pages/punchIn";
 import PunchOut from "./Pages/punchOut";
+import LibraryPage from "./Pages/libraryPage";
 
 
 axios.defaults.baseURL = "http://localhost:8000/api/v1/"
@@ -103,11 +104,14 @@ const App = () => {
                 <Route path="department/:departmentName/exam/:params" element={<CreateExamPage />} />
                 <Route path="department/:departmentName/exam/:examId/studentList" element={<VisitStudentList />} />
                 <Route path="student/:studentId" element={<StudentPage />} />
+                <Route path="department/:departmentName/library/:libraryId" element={<LibraryPage />} /> {/* For department library*/}
+                <Route path="library/:libraryId" element={<LibraryPage />} /> {/* For central library*/}
               </Route>
               <Route path="student/:studentId/attendExam/:examId" element={<AttendExam />} />
               <Route path="student/:studentId/resultPaper/:examId" element={<ResultPage />} />
-              <Route path="department/punchIn" element={<PunchIn/>}/>
-              <Route path="department/punchOut" element={<PunchOut/>}/>
+              <Route path="department/punchIn" element={<PunchIn />} />
+              <Route path="department/punchOut" element={<PunchOut />} />
+              <Route path="*" element={<div className="flex items-center justify-center min-h-[60vh] text-gray-400">Page Not Found</div>} />
             </Routes>
         }
         <ToastContainer />

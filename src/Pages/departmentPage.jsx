@@ -14,11 +14,12 @@ import PaperList from "../Components/PaperList";
 import { useLoadingContext } from "../Context_API/LoadingContext";
 import {
     faBuilding, faUserTie, faLayerGroup, faBullhorn, faFileAlt,
-    faFingerprint, faArrowLeft, faTrash
+    faFingerprint, faArrowLeft, faTrash, faBook
 } from "@fortawesome/free-solid-svg-icons";
 import ShowDepartment from "../Components/ShowDepartment";
 import PopWindow from "../Components/Others/PopWindow";
 import DashboardLayout from "../Components/Others/DashboardLayout";
+import ShowLibrary from "../Components/Library/ShowLibrary";
 
 const DepartmentPage = () => {
     const { data: deptData, status: deptStatus } = useSelector(state => state.department);
@@ -47,14 +48,15 @@ const DepartmentPage = () => {
     };
 
     const navItems = [
-        { key: "account",     label: "Account",          icon: faBuilding,    onClick: () => setShowField("account") },
+        { key: "account", label: "Account", icon: faBuilding, onClick: () => setShowField("account") },
         ...(isSuperAdmin ? [{ key: "showAdmin", label: "Department Admin", icon: faUserTie, onClick: () => setShowField("showAdmin") }] : []),
-        { key: "facultyList", label: "Faculty List",     icon: faUserTie,     onClick: () => setShowField("facultyList"),  disabled: isloading || isRemoving },
-        { key: "batchList",   label: "Batch List",       icon: faLayerGroup,  onClick: () => setShowField("batchList"),    disabled: isloading || isRemoving },
-        { key: "announcement",label: "Announcement",     icon: faBullhorn,    onClick: () => setShowField("announcement"), disabled: isloading || isRemoving },
-        { key: "papers",      label: "Papers",           icon: faFileAlt,     onClick: () => setShowField("papers"),       disabled: isloading || isRemoving },
+        { key: "facultyList", label: "Faculty List", icon: faUserTie, onClick: () => setShowField("facultyList"), disabled: isloading || isRemoving },
+        { key: "batchList", label: "Batch List", icon: faLayerGroup, onClick: () => setShowField("batchList"), disabled: isloading || isRemoving },
+        { key: "announcement", label: "Announcement", icon: faBullhorn, onClick: () => setShowField("announcement"), disabled: isloading || isRemoving },
+        { key: "papers", label: "Papers", icon: faFileAlt, onClick: () => setShowField("papers"), disabled: isloading || isRemoving },
+        { key: "library", label: "Library", icon: faBook, onClick: () => setShowField("library"), disabled: isloading || isRemoving },
         ...(admin ? [
-            { key: "punchIn",  label: "Punch In",  icon: faFingerprint, onClick: () => navigate("/department/punchIn"),  disabled: isloading || isRemoving },
+            { key: "punchIn", label: "Punch In", icon: faFingerprint, onClick: () => navigate("/department/punchIn"), disabled: isloading || isRemoving },
             { key: "punchOut", label: "Punch Out", icon: faFingerprint, onClick: () => navigate("/department/punchOut"), disabled: isloading || isRemoving },
         ] : []),
     ];
@@ -85,12 +87,13 @@ const DepartmentPage = () => {
                 activeKey={showField}
                 pageTitle="Department Dashboard"
             >
-                {showField === "account"      && <ShowDepartment />}
-                {showField === "showAdmin"    && <DepartmentAdmin deptId={deptData._id} />}
-                {showField === "facultyList"  && <FacultyList deptId={deptData._id} faculties={deptData.facultyList} />}
-                {showField === "batchList"    && <BatchList batchList={deptData.batches} deptId={deptData._id} />}
+                {showField === "account" && <ShowDepartment />}
+                {showField === "showAdmin" && <DepartmentAdmin deptId={deptData._id} />}
+                {showField === "facultyList" && <FacultyList deptId={deptData._id} faculties={deptData.facultyList} />}
+                {showField === "batchList" && <BatchList batchList={deptData.batches} deptId={deptData._id} />}
                 {showField === "announcement" && <Announcement deptId={deptData._id} announcements={deptData.announcements} batchName={null} type="Department" />}
-                {showField === "papers"       && <PaperList deptId={deptData._id} papers={deptData.papers} />}
+                {showField === "papers" && <PaperList deptId={deptData._id} papers={deptData.papers} />}
+                {showField === "library" && <ShowLibrary deptId={deptData._id} isCentralLibrary={false} />}
             </DashboardLayout>
         </>
     );
